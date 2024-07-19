@@ -182,6 +182,13 @@ if [ "$DEMO" != "true" ]; then
     done
 fi
 
+git clone --depth 1 --branch v1.6.0 https://github.com/pramsey/pgsql-http
+
+pushd pgsql-http
+make
+make install
+popd
+
 # make it possible for cron to work without root
 gcc -s -shared -fPIC -o /usr/local/lib/cron_unprivileged.so cron_unprivileged.c
 
