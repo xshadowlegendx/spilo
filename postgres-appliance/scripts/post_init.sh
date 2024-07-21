@@ -111,7 +111,7 @@ BEGIN
     END IF;
 END;\$\$;
 
-CREATE EXTENSION IF NOT EXISTS http;
+CREATE EXTENSION IF NOT EXISTS http SCHEMA public;
 
 CREATE TABLE IF NOT EXISTS public.postgres_log (
     log_time timestamp(3) with time zone,
