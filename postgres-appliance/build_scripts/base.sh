@@ -185,6 +185,7 @@ fi
 git clone --depth 1 --branch v1.6.0 https://github.com/pramsey/pgsql-http
 
 pushd pgsql-http
+sed -i "s#PG_CONFIG = pg_config#PG_CONFIG = /usr/lib/postgresql/${version}/bin/pg_config#g" Makefile
 make
 make install
 popd
