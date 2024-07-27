@@ -7,6 +7,8 @@ export PGOPTIONS="-c synchronous_commit=local -c search_path=pg_catalog"
 PGVER=$(psql -d "$2" -XtAc "SELECT pg_catalog.current_setting('server_version_num')::int/10000")
 RESET_ARGS="oid, oid, bigint"
 
+psql -d "$2" -c 'CREATE EXTENSION IF NOT EXISTS http SCHEMA public'
+
 (echo "\set ON_ERROR_STOP on"
 echo "DO \$\$
 BEGIN
@@ -110,8 +112,6 @@ BEGIN
         CREATE SERVER pglog FOREIGN DATA WRAPPER file_fdw;
     END IF;
 END;\$\$;
-
-CREATE EXTENSION IF NOT EXISTS http SCHEMA public;
 
 CREATE TABLE IF NOT EXISTS public.postgres_log (
     log_time timestamp(3) with time zone,
